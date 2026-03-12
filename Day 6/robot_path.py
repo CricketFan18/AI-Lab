@@ -1,8 +1,8 @@
-import heapq
 import math
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import List, Tuple, Dict, Optional
+from queue import PriorityQueue  # Imported PriorityQueue
 
 
 class RobotPlanner:
@@ -56,14 +56,15 @@ class RobotPlanner:
 
         # Setup Priority Queue: (priority, sort_index, node)
         # sort_index is a tie-breaker to avoid comparing coordinate tuples directly
-        pq = []
-        heapq.heappush(pq, (0, 0, start))
+        pq = PriorityQueue()
+        pq.put((0, 0, start))  # Replaced heappush with put
 
         # Costs
         g_score: Dict[Tuple[int, int], float] = {start: 0.0}
         # Values can be a Tuple OR None
         parents: Dict[Tuple[int, int], Optional[Tuple[int, int]]] = {start: None}
         explored_count = 0
+
         # Determine heuristic method based on movement
         h_method = "manhattan" if movement_type == "4-way" else "euclidean"
         allow_diag = movement_type == "8-way"
@@ -89,8 +90,8 @@ class RobotPlanner:
 
         # Logic for A* and UCS
         tie_breaker = 0
-        while pq:
-            _, _, current = heapq.heappop(pq)
+        while not pq.empty():  # Replaced 'while pq:' with 'not pq.empty()'
+            _, _, current = pq.get()  # Replaced heappop with get
             explored_count += 1
 
             if current == goal:
@@ -116,7 +117,7 @@ class RobotPlanner:
                         f_score = tentative_g + self.heuristic(neighbor, goal, h_method)
 
                     tie_breaker += 1
-                    heapq.heappush(pq, (f_score, tie_breaker, neighbor))
+                    pq.put((f_score, tie_breaker, neighbor))  # Replaced heappush with put
 
         return [], explored_count
 
