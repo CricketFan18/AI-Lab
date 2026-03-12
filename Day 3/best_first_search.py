@@ -1,6 +1,7 @@
 from typing import List, Tuple, Dict, Optional
 from queue import PriorityQueue
 
+
 class TreasureHunt:
     def __init__(self, grid: List[List[str]]) -> None:
         self.grid = grid
@@ -19,7 +20,7 @@ class TreasureHunt:
         start_t = (start[0], start[1])
         goal_t = (goal[0], goal[1])
 
-        explored = set([start_t])                      # visited/discovered
+        explored = set([start_t])  # visited/discovered
         parent: Dict[Tuple[int, int], Optional[Tuple[int, int]]] = {start_t: None}
 
         pq = PriorityQueue()
@@ -55,8 +56,9 @@ class TreasureHunt:
         # If we exit the loop, no path found
         self.result = []
 
-    def construct_path(self, parent: Dict[Tuple[int, int], Optional[Tuple[int, int]]],
-                       end: Tuple[int, int]) -> List[Tuple[int, int]]:
+    def construct_path(
+        self, parent: Dict[Tuple[int, int], Optional[Tuple[int, int]]], end: Tuple[int, int]
+    ) -> List[Tuple[int, int]]:
         path = []
         cur: Optional[Tuple[int, int]] = end
         while cur is not None:
@@ -78,16 +80,17 @@ class TreasureHunt:
 
 def main():
     grid = [
-        ["S","B","W","W","W"],
-        ["W","B","W","B","W"],
-        ["W","B","W","B","W"],
-        ["W","B","W","B","W"],
-        ["W","W","W","B","X"],
+        ["S", "B", "W", "W", "W"],
+        ["W", "B", "W", "B", "W"],
+        ["W", "B", "W", "B", "W"],
+        ["W", "B", "W", "B", "W"],
+        ["W", "W", "W", "B", "X"],
     ]
 
     hunter = TreasureHunt(grid)
     hunter.search([0, 0], [4, 4])
     hunter.showResult()
+
 
 if __name__ == "__main__":
     main()

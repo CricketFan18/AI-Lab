@@ -2,6 +2,7 @@ from typing import Dict, List, Tuple, Optional
 from queue import PriorityQueue
 from collections import deque
 
+
 class UniformCostSearch:
     def __init__(self, graph: Dict[str, List[Tuple[str, int]]]) -> None:
         """
@@ -80,12 +81,13 @@ def main():
         "B": [("C", 1), ("D", 4)],
         "C": [("D", 1), ("E", 7)],
         "D": [("E", 3)],
-        "E": []
+        "E": [],
     }
 
     ucs = UniformCostSearch(graph)
     ucs.search("A", "E")
     ucs.showResult()
+
 
 if __name__ == "__main__":
     main()

@@ -2,6 +2,7 @@ from typing import List
 import copy
 from collections import deque
 
+
 class MazeProblem:
     def __init__(self, maze: List[List[int]]):
         self.maze = maze
@@ -56,7 +57,7 @@ class MazeProblem:
         self.result_bfs = []
         self.bfs_nodes_explored = 0
 
-        if self.maze[0][0] == 0 or self.maze[self.row-1][self.column-1] == 0:
+        if self.maze[0][0] == 0 or self.maze[self.row - 1][self.column - 1] == 0:
             return
 
         queue = deque()
@@ -76,10 +77,12 @@ class MazeProblem:
 
             for dx, dy in directions:
                 nx, ny = x + dx, y + dy
-                if (0 <= nx < self.row and
-                    0 <= ny < self.column and
-                    self.maze[nx][ny] == 1 and
-                    (nx, ny) not in visited):
+                if (
+                    0 <= nx < self.row
+                    and 0 <= ny < self.column
+                    and self.maze[nx][ny] == 1
+                    and (nx, ny) not in visited
+                ):
                     visited.add((nx, ny))
                     queue.append((nx, ny, path + [[nx, ny]]))
 
@@ -110,21 +113,17 @@ class MazeProblem:
         print(f"DFS explored {self.dfs_nodes_explored} nodes.")
         print(f"BFS explored {self.bfs_nodes_explored} nodes.")
 
+
 # ---------------- MAIN ----------------
 def main():
-    maze = [
-        [1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 1],
-        [1, 1, 1, 0, 1],
-        [1, 0, 1, 1, 1],
-        [1, 1, 0, 1, 1]
-    ]
+    maze = [[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 1, 1, 0, 1], [1, 0, 1, 1, 1], [1, 1, 0, 1, 1]]
 
     solver = MazeProblem(maze)
     solver.printMaze()
     solver.solve_dfs()
     solver.solve_bfs()
     solver.show_results()
+
 
 if __name__ == "__main__":
     main()

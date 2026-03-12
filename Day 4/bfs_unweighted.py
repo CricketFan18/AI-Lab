@@ -1,6 +1,7 @@
 from typing import Dict, List, Tuple, Optional
 from collections import deque
 
+
 class BFSUnweighted:
     def __init__(self, graph: Dict[str, List[Tuple[str, int]]]) -> None:
         self.graph = graph

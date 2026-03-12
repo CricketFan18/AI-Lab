@@ -1,16 +1,16 @@
 class Stack:
-    def __init__(self,size=5):
+    def __init__(self, size=5):
         self.stack = [-1] * size
         self.size = size
         self.top = -1
-        
+
     def is_full(self):
         return self.top + 1 == self.size
 
     def is_empty(self):
         return self.top == -1
 
-    def push(self,x):
+    def push(self, x):
         if not self.is_full():
             self.top += 1
             self.stack[self.top] = x
@@ -30,11 +30,12 @@ class Stack:
         print("[", end=" ")
         if not self.is_empty():
             for i in range(self.top + 1):
-                if(i != self.top):
+                if i != self.top:
                     print(self.stack[i], end=", ")
                 else:
                     print(self.stack[i], end=" ")
         print("]")
+
 
 def main():
     size = int(input("Enter size of the stack: "))
@@ -49,19 +50,20 @@ def main():
         ch = int(input("Enter your choice: "))
         done = False
         match ch:
-            case 1: 
+            case 1:
                 num = int(input("Enter number: "))
                 my_stack.push(num)
-            case 2: 
-                val = my_stack.pop() 
+            case 2:
+                val = my_stack.pop()
                 if val != -9999:
                     print(f"Popped: {val}")
-            case 3: 
+            case 3:
                 my_stack.print_stack()
-            case 4: 
+            case 4:
                 done = True
         if done:
             break
     print("Exiting...")
-        
+
+
 main()
